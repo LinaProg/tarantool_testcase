@@ -59,10 +59,10 @@ function put_handler(req)
 
     log.info("PUT request: checking valid body")
     if not success or  
-    data['value'] == nil 
-    or type(data['value']) ~= 'table' then
-        log.info("PUT request: body is invalid")
-        return create_resp(req,400)
+    data['value'] == nil or 
+        type(data['value']) ~= 'table' then
+            log.info("PUT request: body is invalid")
+            return create_resp(req,400)
     end
     log.info("PUT request: body is valid")
     log.info("PUT request: trying to find tuple with key " .. id)
@@ -103,12 +103,16 @@ function post_handler(req)
     local success, data = pcall(check_request,req)
     log.info("POST request: checking valid body")
     if not success or 
-    data['key'] == nil or 
-    data['value'] == nil 
-    or type(data['value']) ~= 'table' then
-        log.info("POST request: body is invalid")
-        return create_resp(req,400)
+        data['key'] == nil or 
+        data['value'] == nil or 
+        type(data['value']) ~= 'table'or 
+        type(data['key']) ~= 'string' then
+
+            log.info("POST request: body is invalid")
+            return create_resp(req,400)
+
     end
+
     log.info("POST request: body is valid")
     local id = data['key']
     log.info("POST request: trying to find tuple with key " .. id)
@@ -126,8 +130,8 @@ end
 server = require('http.server').new('0.0.0.0',8080)
 router = require('http.router').new()
 
-router:route({path = 'kv', method = 'POST' }, post_handler)
-router:route({path = 'kv/:id', method = 'GET' }, get_handler)
+router:route({path = '/kv', method = 'POST' }, post_handler)
+router:route({path = '/kv/:id', method = 'GET' }, get_handler)
 router:route({path = '/kv/:id', method = 'PUT' }, put_handler)
 router:route({path = '/kv/:id', method = 'DELETE' }, del_handler)
 server:set_router(router)

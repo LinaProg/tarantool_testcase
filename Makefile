@@ -13,7 +13,7 @@ start:
 	docker run -d --name ${CONTAINER_NAME} -p 8080:8080 ${IMAGE_TAG} -v ./init.lua:/opt/tarantool/init.lua || docker start ${CONTAINER_NAME}
 
 rmbuild: 
-	docker rm -t ${IMAGE_TAG} .
+	docker rm ${IMAGE_TAG} .
 
 rebuild: stop rmbuild build start
 	

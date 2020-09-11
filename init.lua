@@ -102,9 +102,10 @@ function post_handler(req)
 
     local success, data = pcall(check_request,req)
     log.info("POST request: checking valid body")
-    if not success or 
+    if not success or  
         data['key'] == nil or 
         data['value'] == nil or 
+        data['key'] == "" or
         type(data['value']) ~= 'table'or 
         type(data['key']) ~= 'string' then
 

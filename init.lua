@@ -133,5 +133,5 @@ router:route({path = '/kv/:id', method = 'DELETE' }, del_handler)
 server:set_router(router)
 server:start()
 
-require('console').start()
+-- require('console').start()
 

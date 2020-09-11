@@ -1,7 +1,7 @@
 IMAGE_TAG=test
 CONTAINER_NAME=keyvalue
 
-all: stop build start
+all: stop start
 
 stop:
 	docker stop ${CONTAINER_NAME} || true

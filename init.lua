@@ -2,7 +2,7 @@ box.cfg{}
 
 local log =require('log')
 
-kv = box.schema.space.create(
+local kv = box.schema.space.create(
     'KeyValue',
     {
         format = {
@@ -127,8 +127,8 @@ function post_handler(req)
     return create_resp(req,200)
 end
 
-server = require('http.server').new('0.0.0.0',8080)
-router = require('http.router').new()
+local server = require('http.server').new('0.0.0.0',8080)
+local router = require('http.router').new()
 
 router:route({path = '/kv', method = 'POST' }, post_handler)
 router:route({path = '/kv/:id', method = 'GET' }, get_handler)
@@ -138,4 +138,3 @@ server:set_router(router)
 server:start()
 
 -- require('console').start()
-

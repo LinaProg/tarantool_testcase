@@ -7,7 +7,7 @@ https://app.swaggerhub.com/apis-docs/LinaProg/tarantool_testcase_API/1.0.0
 ## Start app
 
 ```bash
-make all 
+make rebuild 
 ```
 
 ## Server host
